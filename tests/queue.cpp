@@ -9,8 +9,9 @@ TEST_CASE("testing pop,push,throw")
     s.push(1);
     s.push(2);
     std::ostringstream output;
-    output<<s.pop();
-    REQUIRE ("0" == output.str());
+    s.pop();
+    s.show_queue(output);
+    REQUIRE ("12" == output.str());
     s.pop();
     s.pop();
     REQUIRE_THROWS (s.pop());
@@ -23,8 +24,7 @@ TEST_CASE("copy consruct")
     s1.push(2);
     queue_t<int> s2 (s1);
     std::ostringstream output;
-    output<<s2.show_queue();
+    s2.show_queue(output);
     string srav {"012"};
     REQUIRE(srav == output.str() );
 }
-

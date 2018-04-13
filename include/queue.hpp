@@ -4,23 +4,23 @@ using namespace std;
 template<typename T>
 
 class queue_t{
-    
+
 private:
     struct node_t{
         node_t* next;
         T value;
     };
-    
+
     node_t* head;
     node_t* tail;
-    
+
 public:
-    
+
     queue_t(){
         head=nullptr;
         tail=nullptr;
     }
-    
+
     ~queue_t() {
         if (head == nullptr) {
             return;
@@ -34,12 +34,12 @@ public:
         while (head) {
             pop();
         }
-        
+
         head = nullptr;
         tail = nullptr;
         return;
     }
-    
+
     void push(T new_value){
         if (head==nullptr) {
             head = new node_t;
@@ -54,10 +54,11 @@ public:
         tail = tail->next;
         return;
     }
-    
+
     T pop(){
         if (head == nullptr) {
-            cout<<"Empty tree"<<endl;
+          cout<<"Empty tree"<<endl;
+          throw "Empty tree";
         }
         T remove = head->value;
         node_t* new_head = head->next;
@@ -69,22 +70,20 @@ public:
         head = new_head;
         return remove;
     }
-    
-    void show_queue(){
+
+    void show_queue(std::ostream & ostream){
         for (node_t* n = head; n != nullptr; n = n->next) {
-            cout<<n->value<<" ";
+            ostream<<n->value;
         }
         return;
     }
-    
+
     queue_t( const queue_t & other) {
         head = nullptr;
         tail = nullptr;
         for (node_t* n = other.head; n != nullptr; n = n->next) {
             push(n->value);
         }
-        
+
     }
 };
-
-
